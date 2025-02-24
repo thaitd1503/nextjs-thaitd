@@ -1,0 +1,63 @@
+.snippet {
+    position: relative;
+    padding: 32px 5%;
+    margin: 24px 0;
+    border-radius: 16px;
+}
+/*.snippet::before {*/
+/*  display: inline-block;*/
+/*  position: absolute;*/
+/*  top: 6px;*/
+/*  left: 6px;*/
+/*  padding: 0 8px;*/
+/*  content: attr(data-title);*/
+/*  font-size: 12px;*/
+/*  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;*/
+/*  color: white;*/
+/*  background-color: rgb(255, 25, 100);*/
+/*  border-radius: 10px;*/
+/*  line-height: 20px;*/
+/*}*/
+.stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 32px 0;
+    margin: 0 -5%;
+    overflow: hidden;
+}
+.dot-flashing {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #A5A5A5;
+    color: #A5A5A5;
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: 0.5s;
+}
+
+@keyframes dot-flashing {
+    0% {
+        background-color: #ffffff;
+    }
+    20%, 100% {
+        background-color: #A5A5A5;
+    }
+}
+.dot-flashing:nth-child(1) {
+    animation-delay: 0s;
+}
+.dot-flashing:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.dot-flashing:nth-child(3) {
+    animation-delay: 0.4s;
+}
+.dot-flashing:nth-child(4) {
+    animation-delay: 0.6s;
+}
+.dot-flashing:nth-child(5) {
+    animation-delay: 0.8s;
+}
