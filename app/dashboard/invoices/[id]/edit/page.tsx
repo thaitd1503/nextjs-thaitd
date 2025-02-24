@@ -9,6 +9,9 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         fetchInvoiceById(id),
         fetchCustomers(),
     ]);
+    if (!invoice) {
+        notFound();
+    }
     return (
         <main>
             <Breadcrumbs
