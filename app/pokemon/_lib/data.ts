@@ -14,9 +14,9 @@ export class PokemonApi {
       const newListPokemon = PokemonListSchema.parse(response);
 
       const lstPokemonDetails = await Promise.all(
-        newListPokemon.results.map(async (pokemon) => {
-          return await this.getDetailPokemon(pokemon.name);
-        }),
+        newListPokemon.results.map((pokemon) =>
+          this.getDetailPokemon(pokemon.name),
+        ),
       );
 
       return lstPokemonDetails;
