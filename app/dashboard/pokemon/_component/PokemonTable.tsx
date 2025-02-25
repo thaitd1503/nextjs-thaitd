@@ -1,7 +1,6 @@
 "use client";
 import {
   infiniteQueryOptions,
-  useInfiniteQuery,
   useSuspenseInfiniteQuery,
 } from "@tanstack/react-query";
 import {
@@ -16,7 +15,6 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import { pokemonApi } from "@/app/dashboard/pokemon/_lib/data";
-import { Pokemon } from "@/app/dashboard/pokemon/_type/pokemon.type";
 
 const pokemonQueryOptions = () =>
   infiniteQueryOptions({
@@ -28,10 +26,6 @@ const pokemonQueryOptions = () =>
     getNextPageParam: (lastPage, pages) =>
       lastPage.length === 50 ? pages.length * 50 : undefined,
   });
-
-interface PokemonListProps {
-  initialPokemon: Pokemon[];
-}
 
 export default function PokemonTable() {
   const { ref, inView } = useInView();
