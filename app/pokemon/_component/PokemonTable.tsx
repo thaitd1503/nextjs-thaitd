@@ -13,7 +13,6 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import { pokemonApi } from "@/app/pokemon/_lib/data";
-import { Pokemon } from "@/app/pokemon/_type/pokemon.type";
 
 const getPokemon = async ({ pageParam = 0 }) => {
   return await pokemonApi.getPokemonList(pageParam, 50);
@@ -22,7 +21,9 @@ const getPokemon = async ({ pageParam = 0 }) => {
 const pokemonQueryOptions = () =>
   infiniteQueryOptions({
     queryKey: ["pokemon"],
-    queryFn: getPokemon,
+    queryFn: async ({ pageParam }) => {
+      return await pokemonApi.getPokemonList(pageParam, 50);
+    },
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) =>
       lastPage.length === 50 ? pages.length * 50 : undefined,
