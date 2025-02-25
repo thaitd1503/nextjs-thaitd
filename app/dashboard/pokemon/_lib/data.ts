@@ -3,7 +3,7 @@ import KyClient from "@/app/services/KyClient";
 import {
   PokemonListSchema,
   PokemonSchema,
-} from "@/app/pokemon/_type/pokemon.type";
+} from "@/app/dashboard/pokemon/_type/pokemon.type";
 
 export class PokemonApi {
   async getPokemonList(offset: number = 0, limit: number = 50) {
