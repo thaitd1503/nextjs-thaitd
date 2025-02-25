@@ -1,6 +1,6 @@
 "use client";
 
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { infiniteQueryOptions, useInfiniteQuery } from "@tanstack/react-query";
 import {
   Table,
   TableBody,
@@ -13,32 +13,32 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import { pokemonApi } from "@/app/pokemon/_lib/data";
+import { Pokemon } from "@/app/pokemon/_type/pokemon.type";
+
+const getPokemon = async ({ pageParam = 0 }) => {
+  return await pokemonApi.getPokemonList(pageParam, 50);
+};
+
+const pokemonQueryOptions = () =>
+  infiniteQueryOptions({
+    queryKey: ["pokemon"],
+    queryFn: getPokemon,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, pages) =>
+      lastPage.length === 50 ? pages.length * 50 : undefined,
+  });
 
 export default function PokemonTable() {
   const { ref, inView } = useInView();
 
-  const getPokemon = async ({ pageParam = 0 }) => {
-    return await pokemonApi.getPokemonList(pageParam, 50);
-  };
-
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteQuery({
-      queryKey: ["pokemon"],
-      queryFn: getPokemon,
-      initialPageParam: 0,
-      getNextPageParam: (lastPage, pages) =>
-        lastPage.length === 50 ? pages.length * 50 : undefined,
-    });
+  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, isLoading } =
+    useInfiniteQuery(pokemonQueryOptions());
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [inView]);
-
-  useEffect(() => {
-    console.log(" 47 isLoading", isLoading);
-  }, [isLoading]);
 
   if (isLoading) return <p className="container mx-auto p-6">Loading...</p>;
   return (
