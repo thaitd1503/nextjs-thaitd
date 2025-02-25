@@ -2,7 +2,7 @@
 
 import '@/app/ui/loading/loading.css';
 
-import useLoadingStore from '@/app/store/loading.store';
+import useLoadingStore from '@/app/pokemon/_store/loading.store';
 import {useStore} from 'zustand';
 import {useEffect} from 'react';
 
